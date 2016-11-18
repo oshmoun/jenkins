@@ -47,7 +47,7 @@ cp /home/build/.keys/* ./build/target/product/security
 brunch $DEVICE
 
 if [ $? -eq 0 ]; then
-	source upload_nightly.sh
+	source upload_build.sh
 	/home/build/delta/omnidelta.sh $DEVICE
 else
 	exit 1
