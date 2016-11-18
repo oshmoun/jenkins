@@ -23,7 +23,7 @@ echo DEVICE=$DEVICE
 echo CCACHE_DIR=$CCACHE_DIR
 export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/
 
-cd /home/build/omni-6
+cd /home/build/omni-7.1
 
 #repo sync -j48
 #fixme: uncommitted changes suddenly appear

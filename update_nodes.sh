@@ -15,10 +15,10 @@ KEY_FILE="/var/lib/jenkins/.ssh/common"
 
 # function to update the git repository from upstream
 update_git() {
-	cd /home/build/jenkins-android-6.0
+	cd /home/build/jenkins-android-7.1
 	git fetch origin
 	git clean -fd
-	git reset --hard remotes/origin/android-6.0
+	git reset --hard remotes/origin/android-7.1
 }
 
 # update the slaves over ssh
