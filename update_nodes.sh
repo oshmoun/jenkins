@@ -11,7 +11,7 @@ MASTER="144.76.14.135"
 # variable definition
 USERNAME=jenkins
 HOSTS="${MASTER} ${CHEESECAKE} ${CUPCAKE}"
-KEY_FILE="/var/lib/jenkins/.ssh/id_rsa"
+KEY_FILE="/var/lib/jenkins/.ssh/common"
 
 # function to update the git repository from upstream
 update_git() {
