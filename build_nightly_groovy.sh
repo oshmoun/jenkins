@@ -48,7 +48,7 @@ brunch $DEVICE
 
 if [ $? -eq 0 ]; then
 	source upload_build.sh
-	/home/build/delta/omnidelta.sh $DEVICE
+#	/home/build/delta/omnidelta.sh $DEVICE
 else
 	exit 1
 fi
