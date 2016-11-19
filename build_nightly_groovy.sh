@@ -25,19 +25,6 @@ export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/
 
 cd /home/build/omni-6
 
-#repo sync -j48
-#fixme: uncommitted changes suddenly appear
-cd .repo/manifests
-git reset --hard
-git clean -fd
-cd ../..
-cd .repo/repo
-git reset --hard
-git clean -fd
-cd ../..
-repo forall -c "git reset --hard" -j48
-repo forall -c "git clean -fd" -j48
-repo sync --force-sync -cdf -j48
 rm -rf out
 
 #use non-public keys to sign ROMs - keys not in git for obvious reasons
@@ -47,6 +34,7 @@ cp /home/build/.keys/* ./build/target/product/security
 brunch $DEVICE
 
 if [ $? -eq 0 ]; then
+	cd /home/build/jenkins-android-6.0
 	source upload_build.sh
 #	/home/build/delta/omnidelta.sh $DEVICE
 else
