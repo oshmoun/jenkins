@@ -7,4 +7,4 @@ ssh -p 9122 -i $KEYFILE omnirom@207.244.74.108 "mkdir -p /var/www/dl.omnirom.org
 
 # Upload file (in a background process?!)
 echo Uploading...
-time scp -P 9122 $OUT/omni*-*RELEASE.zip* omnirom@207.244.74.108:/var/www/dl.omnirom.org/$DEVICE/
+time scp -P 9122 -i $KEYFILE $OUT/omni*-*RELEASE.zip* omnirom@207.244.74.108:/var/www/dl.omnirom.org/$DEVICE/
