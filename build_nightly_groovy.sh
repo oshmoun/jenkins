@@ -35,7 +35,7 @@ brunch $DEVICE
 
 if [ $? -eq 0 ]; then
 	cd /home/build/jenkins-android-6.0
-#	source upload_build.sh
+	source upload_build.sh
 #	/home/build/delta/omnidelta.sh $DEVICE
 else
 	exit 1
