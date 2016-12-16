@@ -4,13 +4,12 @@
 # which contains our build script and list of build targets
 
 # define our servers
-CHEESECAKE="5.9.122.72"
 CUPCAKE="176.9.50.101"
 MASTER="144.76.14.135"
 
 # variable definition
 USERNAME=jenkins
-HOSTS="${MASTER} ${CHEESECAKE} ${CUPCAKE}"
+HOSTS="${MASTER} ${CUPCAKE}"
 KEY_FILE="/var/lib/jenkins/.ssh/common"
 
 # function to update the git repository from upstream
