@@ -43,6 +43,11 @@ if [ -z $SCRIPTDIR ]; then
     exit 1
 fi
 
+if [ -z $UPLOAD ]; then
+    echo UPLOAD not set
+    exit 1
+fi
+
 if [ -z $JAVA ]; then
     export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/
 else
@@ -85,11 +90,15 @@ cp /home/build/.keys/* ./build/target/product/security
 brunch $DEVICE
 
 if [ $? -eq 0 ]; then
-    if [ -n $UPLOAD ]; then
-        cd $SCRIPTDIR
-        source upload_nightly.sh
+    if [ $UPLOAD -eq 1 ]; then
+        # Create dir if needed
+        ssh -p 9122 -i $KEYFILE omnirom@207.244.74.108 "mkdir -p /var/www/dl.omnirom.org/$DEVICE" 2>/dev/null >/dev/null
+
+        # Upload file (in a background process?!)
+        echo Uploading...
+        time scp -P 9122 -i $KEYFILE $ROOTDIR/$DEVICE/omni*-*$BUILDTYPE.zip omnirom@207.244.74.108:/var/www/dl.omnirom.org/$DEVICE/
     fi
-    if [ -n $DELTA ]; then
+    if [ $DELTA -eq 1 ]; then
         /home/build/delta/omnidelta.sh $DEVICE
     fi
 else
