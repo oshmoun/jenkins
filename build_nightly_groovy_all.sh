@@ -22,6 +22,7 @@ SCRIPTDIR=$script_dir
 UPLOAD=$upload
 DELTA=$delta
 JAVA=$java
+KEYFILE=/var/lib/jenkins/.ssh/common
 
 if [ -z $DEVICE ]; then
     echo DEVICE not set
@@ -52,6 +53,10 @@ if [ -z $JAVA ]; then
     export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/
 else
     export JAVA_HOME=$JAVA
+fi
+
+if [ -z $DELTA ]; then
+    DELTA=0
 fi
 
 export ROM_BUILDTYPE=$BUILDTYPE
@@ -95,8 +100,9 @@ if [ $? -eq 0 ]; then
         ssh -p 9122 -i $KEYFILE omnirom@207.244.74.108 "mkdir -p /var/www/dl.omnirom.org/$DEVICE" 2>/dev/null >/dev/null
 
         # Upload file (in a background process?!)
-        echo Uploading...
-        time scp -P 9122 -i $KEYFILE $ROOTDIR/$DEVICE/omni*-*$BUILDTYPE.zip omnirom@207.244.74.108:/var/www/dl.omnirom.org/$DEVICE/
+        FILE=`ls $ROOTDIR/out/target/product/$DEVICE/omni*-*$BUILDTYPE.zip`
+        echo Uploading $FILE...
+        time scp -P 9122 -i $KEYFILE "$FILE" "omnirom@207.244.74.108:/var/www/dl.omnirom.org/$DEVICE/"
     fi
     if [ $DELTA -eq 1 ]; then
         /home/build/delta/omnidelta.sh $DEVICE
